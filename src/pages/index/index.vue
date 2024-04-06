@@ -33,14 +33,22 @@ onLoad(() => {
 
 <template>
   <CustomNavbar /><!-- 自定义导航组件引入 -->
-  <XtxSwiper :list="bannerList" /><!-- 自定义轮播图组件全局 -->
-  <view class="index"></view>
-  <CategoryPanel :list="categoryList" />
-  <HotPanel :list="HotPanelList" />
+  <scroll-view scroll-y>
+    <XtxSwiper :list="bannerList" /><!-- 自定义轮播图组件全局 -->
+    <CategoryPanel :list="categoryList" />
+    <HotPanel :list="HotPanelList" />
+    <XtxGuess />
+  </scroll-view>
 </template>
 
 <style lang="scss">
 page {
   background-color: #f7f7f7;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.scroll-view {
+  flex: 1;
 }
 </style>

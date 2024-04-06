@@ -38,8 +38,9 @@ const onScrolltolower = () => {
 }
 const Istriggered = ref(false)
 //自定义下拉刷新被触发
-Istriggered.value = true
+
 const onRefresherrefresh = async () => {
+  Istriggered.value = true
   await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotPanelData()]) //同时发送数据完成后再进行关闭动画
   //结束动画
   Istriggered.value = false

@@ -44,7 +44,7 @@ const onScrolltolower = () => {
     <XtxSwiper :list="bannerList" /><!-- 自定义轮播图组件全局 -->
     <CategoryPanel :list="categoryList" />
     <HotPanel :list="HotPanelList" />
-    <XtxGuess />
+    <XtxGuess ref="guessRef" />
   </scroll-view>
 </template>
 

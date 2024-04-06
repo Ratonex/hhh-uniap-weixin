@@ -41,7 +41,14 @@ const Istriggered = ref(false)
 
 const onRefresherrefresh = async () => {
   Istriggered.value = true
-  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotPanelData()]) //同时发送数据完成后再进行关闭动画
+  // 重置猜你喜欢组件数据
+  guessRef.value?.resetData() // 加载数据
+  await Promise.all([
+    getHomeBannerData(),
+    getHomeCategoryData(),
+    getHotPanelData(),
+    guessRef.value?.getMore(),
+  ]) //同时发送数据完成后再进行关闭动画
   //结束动画
   Istriggered.value = false
 }

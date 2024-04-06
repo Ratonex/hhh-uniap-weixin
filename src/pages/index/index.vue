@@ -36,11 +36,26 @@ const guessRef = ref<XtxGuessInstance>()
 const onScrolltolower = () => {
   guessRef.value?.getMore()
 }
+const Istriggered = ref(false)
+//自定义下拉刷新被触发
+Istriggered.value = true
+const onRefresherrefresh = async () => {
+  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotPanelData()]) //同时发送数据完成后再进行关闭动画
+  //结束动画
+  Istriggered.value = false
+}
 </script>
 
 <template>
   <CustomNavbar /><!-- 自定义导航组件引入 -->
-  <scroll-view @scrolltolower="onScrolltolower" class="scroll-view" scroll-y>
+  <scroll-view
+    refresher-enabled
+    :refresher-triggered="Istriggered"
+    @refresherrefresh="onRefresherrefresh"
+    @scrolltolower="onScrolltolower"
+    class="scroll-view"
+    scroll-y
+  >
     <XtxSwiper :list="bannerList" /><!-- 自定义轮播图组件全局 -->
     <CategoryPanel :list="categoryList" />
     <HotPanel :list="HotPanelList" />

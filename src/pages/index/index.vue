@@ -4,6 +4,7 @@ import CustomNavbar from './components/CustomNavbar/CustomNavbar.vue'
 import { onLoad } from '@dcloudio/uni-app'
 import type { BannerItem, CategoryItem, HotItem } from '@/types/home'
 import { ref } from 'vue'
+import type { XtxGuessInstance } from '@/types/component'
 import CategoryPanel from './components/CategoryPanel/CategoryPanel.vue'
 import HotPanel from './components/HotPanel/HotPanel.vue'
 const bannerList = ref<BannerItem[]>([])
@@ -29,11 +30,17 @@ onLoad(() => {
   getHomeCategoryData()
   getHotPanelData()
 })
+// 获取猜你喜欢组件实例
+const guessRef = ref<XtxGuessInstance>()
+//滚动触底
+const onScrolltolower = () => {
+  guessRef.value?.getMore()
+}
 </script>
 
 <template>
   <CustomNavbar /><!-- 自定义导航组件引入 -->
-  <scroll-view scroll-y>
+  <scroll-view @scrolltolower="onScrolltolower" class="scroll-view" scroll-y>
     <XtxSwiper :list="bannerList" /><!-- 自定义轮播图组件全局 -->
     <CategoryPanel :list="categoryList" />
     <HotPanel :list="HotPanelList" />

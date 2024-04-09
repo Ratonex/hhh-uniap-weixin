@@ -2,6 +2,7 @@ import type { GoodsItem } from './global'
 
 /** 首页-广告区域数据类型 */
 export type BannerItem = {
+  value: BannerItem[]
   /** 跳转链接 */
   hrefUrl: string
   /** id */

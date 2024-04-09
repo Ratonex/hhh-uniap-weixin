@@ -7,7 +7,7 @@ import { ref } from 'vue'
 import type { XtxGuessInstance } from '@/types/component'
 import CategoryPanel from './components/CategoryPanel/CategoryPanel.vue'
 import HotPanel from './components/HotPanel/HotPanel.vue'
-import Pageskeleton from './components/PageSkeleton/pageskeleton.vue'
+import PageSkeleton from './components/PageSkeleton/PageSkeleton.vue'
 const bannerList = ref<BannerItem[]>([])
 const getHomeBannerData = async () => {
   const res = await getHomeBannerAPI()
@@ -67,7 +67,7 @@ const onRefresherrefresh = async () => {
     class="scroll-view"
     scroll-y
   >
-    <Pageskeleton v-if="isloding" />
+    <PageSkeleton v-if="isloding" />
     <template>
       <XtxSwiper :list="bannerList" /><!-- 自定义轮播图组件全局 -->
       <CategoryPanel :list="categoryList" /><!-- 分类 -->

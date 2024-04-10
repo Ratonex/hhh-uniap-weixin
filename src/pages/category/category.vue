@@ -21,10 +21,7 @@ const getCategoryTopData = async () => {
   const res = await getCategoryTopAPI()
   categoryList.value = res.result
 }
-// 提取当前二级分类数据
-const subCategoryList = computed(() => {
-  return categoryList.value[activeIndex.value]?.children || []
-})
+
 //是否数据加载完毕
 const isFinish = ref(false)
 //页面加载
@@ -32,8 +29,11 @@ onLoad(async () => {
   await Promise.all([getHomeBannerData(), getCategoryTopData()])
   isFinish.value = true
 })
+// 提取当前二级分类数据
+const subCategoryList = computed(() => {
+  return categoryList.value[activeIndex.value]?.children || []
+})
 </script>
-
 <template>
   <view class="viewport" v-if="isFinish">
     <!-- 搜索框 -->
